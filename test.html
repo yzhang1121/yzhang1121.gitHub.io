@@ -1,3 +1,29 @@
+<!DOCTYPE html>
 <html>
-  <p>TEST</p>
+<body>
+
+<p>Input two numbers to get their sum:</p>
+
+<p>
+<input id="num1" size = "10" value="" /> Number 1
+</p>
+<p>
+<input id="num2" size = "10" value="" /> Number 2
+</p>
+
+<button onclick="sum()">Get sum</button>
+<br>
+
+<p id="sum"></p>
+
+<script>
+function sum() {
+  var num1, num2, sum;
+  sum = Number(document.getElementById("num1").value) + Number(document.getElementById("num2").value);
+  
+  document.getElementById("sum").innerHTML = sum;
+}
+</script>
+
+</body>
 </html>
