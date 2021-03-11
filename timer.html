@@ -2,16 +2,27 @@
 <html>
   <head>
     <script>
-      function timer() {
-        var d = new Date();
-        document.getElementById("clock").innerHTML = d.toLocaleTimeString();
-      }
-      setInterval(timer, 1000);
+    function MyTimer(callback, val) {
+        val = document.getElementById("time").value;
+            val = val || 60; 
+            var timer=setInterval(function() { 
+                callback(val);
+                if(val-- <= 0) { 
+                    clearInterval(timer); 
+            } 
+        }, 1000);
+    }
     </script>
   </head>
   <body>
-
-    <p>The current time on your computer is: <b><span id="clock"></span></b></p>
-
+    <p>Please enter your time (Default is 60 seconds):</p>
+       <input id="time" size = "10" value="" /> (Seconds)
+    <p>    
+    <button onclick='MyTimer(function(val) {
+            var timerMsg = "00:" + (val >= 10 ? val : "0" + val);
+            document.getElementById("timer").textContent = timerMsg; 
+        })'>Start</button>
+    </p>
+    <div id="timer"></div>
   </body>
 </html>
