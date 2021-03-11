@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <script>
+      function sum() {
+        var num1, num2, sum;
+        sum = Number(document.getElementById("num1").value) + Number(document.getElementById("num2").value);
 
-<p>Input two numbers to get their sum:</p>
+        document.getElementById("sum").innerHTML = sum;
+      }
+    </script>
+  </head>  
+  <body>
 
-<p>
-<input id="num1" size = "10" value="" /> Number 1
-</p>
-<p>
-<input id="num2" size = "10" value="" /> Number 2
-</p>
+  <p>Input two numbers to get their sum:</p>
 
-<button onclick="sum()">Get sum</button>
-<br>
+  <p>
+  <input id="num1" size = "10" value="" /> Number 1
+  </p>
+  <p>
+  <input id="num2" size = "10" value="" /> Number 2
+  </p>
 
-<p id="sum"></p>
+  <button onclick="sum()">Get sum</button>
+  <br>
 
-<script>
-function sum() {
-  var num1, num2, sum;
-  sum = Number(document.getElementById("num1").value) + Number(document.getElementById("num2").value);
-  
-  document.getElementById("sum").innerHTML = sum;
-}
-</script>
+  <p id="sum"></p>
 
-</body>
+  </body>
 </html>
