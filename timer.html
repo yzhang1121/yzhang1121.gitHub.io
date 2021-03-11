@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  function timer() {
+    var d = new Date();
+    document.getElementById("clock").innerHTML = d.toLocaleTimeString();
+}
+setInterval(showTime, 1000);
+</script>
+</head>
+<body>
+
+  <p>The current time on your computer is: <b><span id="clock"></span></b></p>
+  
+</body>
+</html>
