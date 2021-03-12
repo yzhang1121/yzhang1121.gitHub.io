@@ -2,27 +2,41 @@
 <html>
   <head>
     <script>
-    function MyTimer(callback, val) {
-        val = document.getElementById("time").value;
-            val = val || 60; 
-            var timer=setInterval(function() { 
-                callback(val);
-                if(val-- <= 0) { 
-                    clearInterval(timer); 
-            } 
-        }, 1000);
-    }
+      var intervalID;
+
+      function myTimer(callback, val) {
+          val = document.getElementById("time").value;
+              val = val || 60; 
+              var timer=setInterval(function() { 
+                  callback(val);
+                  if(val-- <= 0) { 
+                      clearInterval(timer); 
+              } 
+              intervalID = timer;
+          }, 1000);
+      }
+
+      function stopTimer() {
+          clearInterval(intervalID);
+          var timerMsg = "00:00";
+          document.getElementById("timer").textContent = timerMsg; 
+      }
     </script>
   </head>
   <body>
+    <h2>My Timer</h2>
     <p>Please enter your time (Default is 60 seconds):</p>
-       <input id="time" size = "10" value="" /> (Seconds)
+    <input id="time" size = "10" value="" /> (Seconds)
+    
     <p>    
-    <button onclick='MyTimer(function(val) {
-            var timerMsg = "00:" + (val >= 10 ? val : "0" + val);
-            document.getElementById("timer").textContent = timerMsg; 
-        })'>Start</button>
+    <button onclick='myTimer(function(val) {
+        var timerMsg = "00:" + (val >= 10 ? val : "0" + val);
+        document.getElementById("timer").textContent = timerMsg; 
+    })'>Start</button>
+    <button onclick='stopTimer()'>Stop</button>
     </p>
+    
     <div id="timer"></div>
   </body>
 </html>
+
