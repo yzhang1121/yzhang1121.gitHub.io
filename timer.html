@@ -5,15 +5,19 @@
     var intervalID;
     
     function myTimer(callback, val) {
-        val = document.getElementById("time").value ;
+        val = document.getElementById("time").value;
+        if (isNaN(val)) {
+            document.getElementById("timer").textContent = "Please enter a number.";
+        } else {
             val = val || 60; 
             var timer=setInterval(function() { 
                 callback(val);
                 if(val-- <= 0) { 
                     clearInterval(timer); 
-            } 
-            intervalID = timer;
-        }, 1000);
+                } 
+                intervalID = timer;
+            }, 1000);
+        }
     }
     
     function stopTimer() {
