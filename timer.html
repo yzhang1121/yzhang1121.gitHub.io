@@ -2,41 +2,72 @@
 <html>
   <head>
     <script>
-      var intervalID;
-
-      function myTimer(callback, val) {
-          val = document.getElementById("time").value;
-              val = val || 60; 
-              var timer=setInterval(function() { 
-                  callback(val);
-                  if(val-- <= 0) { 
-                      clearInterval(timer); 
-              } 
-              intervalID = timer;
-          }, 1000);
-      }
-
-      function stopTimer() {
-          clearInterval(intervalID);
-          var timerMsg = "00:00";
-          document.getElementById("timer").textContent = timerMsg; 
-      }
+    var intervalID;
+    
+    function myTimer(callback, val) {
+        val = document.getElementById("time").value ;
+            val = val || 60; 
+            var timer=setInterval(function() { 
+                callback(val);
+                if(val-- <= 0) { 
+                    clearInterval(timer); 
+            } 
+            intervalID = timer;
+        }, 1000);
+    }
+    
+    function stopTimer() {
+      	clearInterval(intervalID);
+        var timerMsg = document.getElementById("timer").textContent;
+        var mins = timerMsg.substring(0,2);
+        if (mins == "00") {
+         	mins = 0;
+        } else if (mins < "10") {
+        	mins = Number(mins.substring(1,2)) * 60;
+        } else {
+        	mins = Number(mins.substring(0,2)) * 60;
+        }
+        var secs = timerMsg.substring(3,5);
+        if (secs == "00") {
+         	secs = 0;
+        } else if (secs < "10") {
+        	secs = Number(secs.substring(1,2));
+        } else {
+        	secs = Number(secs.substring(0,2));
+        }
+        timerMsg = mins + secs;
+        document.getElementById("time").value = timerMsg; 
+    }
+    
+    function reset() {
+      	clearInterval(intervalID);
+        var timerMsg = "00:00";
+        document.getElementById("timer").textContent = timerMsg; 
+        document.getElementById("time").value = "";
+    }
+    
     </script>
   </head>
   <body>
+  	
     <h2>My Timer</h2>
     <p>Please enter your time (Default is 60 seconds):</p>
     <input id="time" size = "10" value="" /> (Seconds)
     
     <p>    
     <button onclick='myTimer(function(val) {
-        var timerMsg = "00:" + (val >= 10 ? val : "0" + val);
-        document.getElementById("timer").textContent = timerMsg; 
-    })'>Start</button>
-    <button onclick='stopTimer()'>Stop</button>
+    		var mins = Math.floor(val/60);
+            var secs = val % 60;
+            mins = (mins >= 10 ? mins : "0" + mins);
+            secs = (secs >= 10 ? secs : "0" + secs);
+            var timerMsg = mins + ":" + secs;
+            document.getElementById("timer").textContent = timerMsg;           
+        })'>Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button type="reset" onclick="reset()">Reset</button>
     </p>
-    
-    <div id="timer"></div>
+    <div id="timer">00:00</div>
+      
   </body>
 </html>
 
